@@ -2,18 +2,18 @@ package collection.array;
 
 import java.util.Arrays;
 
-public class MyArrayListV3 {
+public class MyArrayListV4<E> {
 
     private static final int DEFAULT_CAPACITY = 5;
 
     private Object[] elementData;
     private int size = 0;
 
-    public MyArrayListV3() {
+    public MyArrayListV4() {
         elementData = new Object[DEFAULT_CAPACITY];
     }
 
-    public MyArrayListV3(int initialCapacity) {
+    public MyArrayListV4(int initialCapacity) {
         elementData = new Object[initialCapacity];
     }
 
@@ -21,7 +21,7 @@ public class MyArrayListV3 {
         return size;
     }
 
-    public void add(Object e) {
+    public void add(E e) {
         // 마지막 인덱스에 추가 ✅
         if (size == elementData.length) {
             grow();
@@ -30,28 +30,28 @@ public class MyArrayListV3 {
         size++;
     }
 
-    public void add(int index, Object e) {
-        // 코드 추가, index 로 원하는 위치에 데이터 넣기 ✅
+    //
+    @SuppressWarnings("unchecked")
+    public E get(int index) {
+        return (E) elementData[index];
+    }
+
+    public void add(int index, E e) {
         if (size == elementData.length) {
             grow();
         }
         shiftRightFrom(index);
-        // 데이터를 넣는 위치를 size 에서 index 로 변경 
         elementData[index] = e;
         size++;
     }
 
-    public Object get(int index) { // 해당 인덱스의 배열 데이터 반환 (toString 형식으로)
-        return elementData[index];
-    }
-
-    public Object set(int index, Object element) {
-        Object oldValue = get(index);
+    public E set(int index, E element) {
+        E oldValue = get(index);
         elementData[index] = element;
         return oldValue;
     }
 
-    public int indexOf(Object o) {
+    public int indexOf(E o) {
         for (int i = 0; i < size; i++) {
             if (o.equals(elementData[i])) {
                 return i;
@@ -71,16 +71,14 @@ public class MyArrayListV3 {
         elementData = Arrays.copyOf(elementData, newCapacity);
     }
 
-    // 요소의 마지막부터 index 까지 오른쪽으로 밀기 ✅
     private void shiftRightFrom(int index) {
         for (int i = size; i > index; i--) {
             elementData[i] = elementData[i - 1];
         }
     }
 
-    // 코드 추가, 해당 인덱스 데이터 삭제 ✅
-    public Object remove(int index) {
-        Object oldValue = get(index);
+    public E remove(int index) {
+        E oldValue = get(index);
         shiftLeftFrom(index);
 
         size--;
@@ -88,7 +86,6 @@ public class MyArrayListV3 {
         return oldValue;
     }
 
-    // 요소의 index 부터 마지막까지 왼쪽으로 밀기 ✅
     private void shiftLeftFrom(int index) {
         for (int i = 0; i < size - 1; i++) {
             elementData[i] = elementData[i + 1];
