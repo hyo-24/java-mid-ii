@@ -10,7 +10,6 @@ public class BatchProcessor {
     public BatchProcessor(MyList<Integer> list) {
         this.list = list;
     }
-
     public void logic(int size) {
         long startTime = System.currentTimeMillis();
         for (int i = 0; i < size; i++) {
