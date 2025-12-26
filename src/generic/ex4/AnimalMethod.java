@@ -4,7 +4,7 @@ import generic.animal.Animal;
 
 public class AnimalMethod {
 
-    public static <T extends Animal> void checkup(T t) {
+    public static <T extends Animal> void checkup(T t) { // 반환 타입은 Animal을 상속받은 T타입, 인자는 그냥 T타입
         System.out.println("동물 이름: " + t.getName());
         System.out.println("동물 크기: " + t.getSize());
         t.sound();
