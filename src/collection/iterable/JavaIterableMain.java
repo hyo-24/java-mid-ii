@@ -25,14 +25,15 @@ public class JavaIterableMain {
     private static void printAll(Iterator<Integer> iterator) {
         System.out.println("iterator = " + iterator.getClass());
         while (iterator.hasNext()) {
-            System.out.println(iterator.next());
+            System.out.print(iterator.next());
         }
+        System.out.println();
     }
 
     private static void foreach(Iterable<Integer> iterable) {
         System.out.println("iterable = " + iterable.getClass());
         for (Integer i : iterable) {
-            System.out.println(i);
+            System.out.print(i);
         }
     }
 }
